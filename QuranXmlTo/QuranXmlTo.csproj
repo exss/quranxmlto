@@ -48,7 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\QuranParser.cs" />
+    <Compile Include="Formatter\FileQuranFormatter.cs" />
     <Compile Include="Formatter\IQuranFormatter.cs" />
+    <Compile Include="Formatter\JsonQuranFormatter.cs" />
     <Compile Include="Models\Chapter.cs" />
     <Compile Include="Models\Quran.cs" />
     <Compile Include="Models\Verse.cs" />
