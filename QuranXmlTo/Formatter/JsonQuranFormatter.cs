@@ -28,7 +28,6 @@ namespace QuranXmlTo.Formatter
             };
         }
 
-
         /// <summary>
         /// Gets or sets the settings for json serialization.
         /// </summary>
@@ -46,7 +45,7 @@ namespace QuranXmlTo.Formatter
                 using (var file = File.Create(Path.Combine(OutputDirectory, chapter.Index + ".json")))
                 {
                     using (var writer = new StreamWriter(file))
-                    {                       
+                    {
                         writer.Write(JsonConvert.SerializeObject(chapter,Settings));
                         writer.Flush();
                     }
