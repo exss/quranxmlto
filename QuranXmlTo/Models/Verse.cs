@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace QuranXmlTo.Models
 {
@@ -41,6 +42,8 @@ namespace QuranXmlTo.Models
         /// <value>
         /// The chapter.
         /// </value>
+        
+        [JsonIgnore]
         public Chapter Chapter { get; private set; }
     }
 }

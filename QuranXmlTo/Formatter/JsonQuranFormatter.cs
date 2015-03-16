@@ -16,18 +16,31 @@ namespace QuranXmlTo.Formatter
     {        
         public JsonQuranFormatter(string outputDirectory) : base(outputDirectory)
         {
+            Initialize();
         }
+
+        private void Initialize()
+        {
+            Settings = new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                Formatting = Formatting.Indented
+            };
+        }
+
+        public JsonSerializerSettings Settings { get; set; }
 
 
         public override void Format(Quran quran)
         {
+            
             foreach (var chapter in quran.Chapters)
             {
                 using (var file = File.Create(Path.Combine(OutputDirectory, chapter.Index + ".json")))
                 {
                     using (var writer = new StreamWriter(file))
-                    {
-                        writer.Write(JsonConvert.SerializeObject(chapter));
+                    {                       
+                        writer.Write(JsonConvert.SerializeObject(chapter,Settings));
                         writer.Flush();
                     }
                 }
@@ -42,7 +55,7 @@ namespace QuranXmlTo.Formatter
                 {
                     using (var writer = new StreamWriter(file))
                     {
-                        await writer.WriteAsync(JsonConvert.SerializeObject(chapter));
+                        await writer.WriteAsync(JsonConvert.SerializeObject(chapter, Settings));
                         await writer.FlushAsync();
                     }
                 }

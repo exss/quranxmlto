@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using QuranXmlTo.Core;
+using QuranXmlTo.Formatter;
 
 namespace QuranXmlTo
 {
@@ -13,6 +14,8 @@ namespace QuranXmlTo
         {
             var parser = new QuranParser("Source/quran-simple.xml");
             var quran = parser.Parse();
+            var jsonFormatter = new JsonQuranFormatter("JSON");
+            jsonFormatter.Format(quran);
         }
     }
 }
