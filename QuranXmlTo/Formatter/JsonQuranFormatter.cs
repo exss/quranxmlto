@@ -2,13 +2,37 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using QuranXmlTo.Models;
 
 namespace QuranXmlTo.Formatter
 {
+    internal class JsonQuranSerializationContract : DefaultContractResolver
+    {
+        protected override List<MemberInfo> GetSerializableMembers(Type objectType)
+        {
+            List<MemberInfo> serialized = new List<MemberInfo>();
+            if (objectType == typeof(Chapter))
+            {
+                serialized.AddRange(
+                    objectType.GetMembers().Where(memberInfo =>
+                        memberInfo.DeclaringType != typeof (Quran) && memberInfo.MemberType == MemberTypes.Property)
+                    );
+            }
+            if (objectType == typeof (Verse))
+            {
+                serialized.AddRange(
+                    objectType.GetMembers().Where(memberInfo => 
+                        memberInfo.DeclaringType != typeof(Chapter) && memberInfo.MemberType == MemberTypes.Property)
+                    );
+            }
+            return serialized;
+        }
+    }
     /// <summary>
     /// Output a quran into a list of json files based on the chapter.
     /// </summary>
@@ -24,7 +48,8 @@ namespace QuranXmlTo.Formatter
             Settings = new JsonSerializerSettings
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                Formatting = Formatting.Indented
+                Formatting = Formatting.Indented,
+                ContractResolver = new JsonQuranSerializationContract()
             };
         }
 

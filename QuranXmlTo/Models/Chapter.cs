@@ -41,8 +41,7 @@ namespace QuranXmlTo.Models
         /// </summary>
         /// <value>
         /// The quran.
-        /// </value>
-        [JsonIgnore]
+        /// </value>        
         public Quran Quran { get; private set; }
 
         /// <summary>

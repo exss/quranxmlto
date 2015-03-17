@@ -41,9 +41,7 @@ namespace QuranXmlTo.Models
         /// </summary>
         /// <value>
         /// The chapter.
-        /// </value>
-        
-        [JsonIgnore]
+        /// </value>                
         public Chapter Chapter { get; private set; }
     }
 }
