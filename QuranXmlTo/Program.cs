@@ -14,8 +14,8 @@ namespace QuranXmlTo
         {
             var parser = new QuranParser("Source/quran-simple.xml");
             var quran = parser.Parse();
-            var jsonFormatter = new JsonQuranFormatter("JSON");
-            jsonFormatter.Format(quran);
+            var csvFormatter = new CsvQuranFormatter("CSV");
+            csvFormatter.Format(quran);
         }
     }
 }
