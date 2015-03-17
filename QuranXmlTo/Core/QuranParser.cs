@@ -51,8 +51,8 @@ namespace QuranXmlTo.Core
                 {
                     var chapter = new Chapter(quran)
                     {
-                        Index = Convert.ToInt32(xChapter.Attribute(XName.Get("index")).Value),
-                        Name = xChapter.Attribute(XName.Get("name")).Value,
+                        Index = Convert.ToInt32(xChapter.Attribute(XName.Get("index")).Value.Trim()),
+                        Name = xChapter.Attribute(XName.Get("name")).Value.Trim(),
                     };
                     chapter.Verses = ParseVerses(xChapter, chapter);
                     yield return chapter;
@@ -78,8 +78,8 @@ namespace QuranXmlTo.Core
             {
                 var verse = new Verse(chapter)
                 {
-                    Index = Convert.ToInt32(xVerse.Attribute(XName.Get("index")).Value),
-                    Text = xVerse.Attribute(XName.Get("text")).Value
+                    Index = Convert.ToInt32(xVerse.Attribute(XName.Get("index")).Value.Trim()),
+                    Text = xVerse.Attribute(XName.Get("text")).Value.Trim()
                 };
                 yield return verse;
             }
